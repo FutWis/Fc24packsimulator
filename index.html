@@ -1,40 +1,66 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC24 Pack Opener</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <button onclick="getRandomImage()">Open Pack</button>
-    <br><br>
-    <img id="image" src="">
+    <style>
+        #image-container {
+            text-align: center;
+            margin: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pack Opener</h1>
+    <button id="show-image-button">Open Pack</button>
+    <div id="image-container">
+        <img id="displayed-image" src="" alt="Image will appear here">
+    </div>
+
     <script>
-      var packedImages = JSON.parse(localStorage.getItem('packedImages')) || [];
-
-      function getRandomImage() {
-        var image = document.getElementById("image");
-        var randomNum = Math.random();
-        var highProbImages = [
-         
-
+        // Define image categories and their rarity percentages
+        const imageCategories = [
+            { category: 'Common Gold', rarity: 80 },
+            { category: 'Rare Gold', rarity: 13 },
+            { category: 'Nike Ready', rarity: 6.7 },
+            { category: 'Icon', rarity: 0.3 }
         ];
-        var lowProbImages = [
-        
-        ];
-        if (randomNum < 0.95) {
-          // get image with 95% chance
-          var imageUrl = highProbImages[Math.floor(Math.random() * highProbImages.length)];
-        } else {
-          // get image with 5% chance
-          var imageUrl = lowProbImages[Math.floor(Math.random() * lowProbImages.length)];
+
+        // Define a mapping of category names to file paths
+        const categoryFilePaths = {
+            'Common Gold': 'https://mathv2FCPackOpener.netlify.app/Cards/Golds/',
+            'Rare Gold': 'https://mathv2FCPackOpener.netlify.app/Cards/Golds/',
+            'Nike Ready': 'https://mathv2FCPackOpener.netlify.app/Cards/Nike Ready/',
+            'Icon': 'https://mathv2FCPackOpener.netlify.app/Cards/Icons/'
+        };
+
+        // Function to select a random category based on rarity percentages
+        function selectRandomCategory() {
+            const rand = Math.random() * 100;
+            let cumulativeProbability = 0;
+            
+            for (const category of imageCategories) {
+                cumulativeProbability += category.rarity;
+                if (rand <= cumulativeProbability) {
+                    return category;
+                }
+            }
         }
-        image.src = imageUrl;
-        if (packedImages.includes(imageUrl.split('/').pop())) {
-          // add to packed list and update local storage
-          packedImages.push(imageUrl.split('/').pop());
-          localStorage.setItem('packedImages', JSON.stringify(packedImages));
+
+        // Function to display a random image from the selected category
+        function showRandomImage() {
+            const selectedCategory = selectRandomCategory();
+            const imageSrc = categoryFilePaths[selectedCategory.category];
+            document.getElementById('displayed-image').src = imageSrc;
         }
-      }
+
+        // Add click event listener to the button
+        document.getElementById('show-image-button').addEventListener('click', showRandomImage);
     </script>
-  </body>
+</body>
 </html>
