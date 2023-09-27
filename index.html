@@ -72,6 +72,29 @@
             'Icon': ['Cards/Icons/R9.png']
         };
 
+        // Function to select a random category based on rarity percentages
+        function selectRandomCategory() {
+            const rand = Math.random() * 100;
+            let cumulativeProbability = 0;
+            
+            for (const category of imageCategories) {
+                cumulativeProbability += category.rarity;
+                if (rand <= cumulativeProbability) {
+                    return category;
+                }
+            }
+        }
+
+        // Function to select a random image from the selected category
+        function selectRandomImage(category) {
+            const images = categoryFilePaths[category];
+            if (images && images.length > 0) {
+                const randomIndex = Math.floor(Math.random() * images.length);
+                return images[randomIndex];
+            }
+            return null;
+        }
+
         // Function to display a random image from the selected category
         function showRandomImage() {
             // Hide the card immediately
