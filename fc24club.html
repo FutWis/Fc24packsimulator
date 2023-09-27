@@ -1,0 +1,40 @@
+<!-- fc24club.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC24 Club</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>FC24 Club</h1>
+    <div id="club-images-container"></div>
+
+    <script>
+        // Function to extract query parameters from the URL
+        function getQueryParameters() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return Object.fromEntries(urlParams.entries());
+        }
+
+        // Function to display stored images
+        function displayStoredImages() {
+            const queryParameters = getQueryParameters();
+            const images = queryParameters.images ? queryParameters.images.split('&images=') : [];
+
+            const clubImagesContainer = document.getElementById('club-images-container');
+            for (const imageUrl of images) {
+                const imageElement = document.createElement('img');
+                imageElement.src = imageUrl;
+                imageElement.alt = 'Stored Image';
+                clubImagesContainer.appendChild(imageElement);
+            }
+        }
+
+        // Load and display stored images when the page loads
+        displayStoredImages();
+    </script>
+</body>
+</html>
