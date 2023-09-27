@@ -12,35 +12,23 @@
     <div id="club-images-container"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        displayStoredImages();
-    });
-        // Function to extract query parameters from the URL
-        function getQueryParameters() {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return Object.fromEntries(urlParams.entries());
+        // Function to display stored images
+        function displayStoredImages() {
+            const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+            const clubImagesContainer = document.getElementById('club-images-container');
+            
+            for (const imageUrl of storedImages) {
+                const imageElement = document.createElement('img');
+                imageElement.src = imageUrl;
+                imageElement.alt = 'Stored Image';
+                clubImagesContainer.appendChild(imageElement);
+            }
         }
 
-        // Function to display stored images
-function displayStoredImages() {
-    const queryParameters = getQueryParameters();
-    const images = queryParameters.images ? queryParameters.images.split('&images=') : [];
-
-    console.log('Images received:', images); // Add this line for debugging
-
-    const clubImagesContainer = document.getElementById('club-images-container');
-    for (const imageUrl of images) {
-        const imageElement = document.createElement('img');
-        imageElement.src = imageUrl;
-        imageElement.alt = 'Stored Image';
-        clubImagesContainer.appendChild(imageElement);
-    }
-}
-
-
-        // Load and display stored images when the page loads
-        displayStoredImages();
+        // Call the displayStoredImages function when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            displayStoredImages();
+        });
     </script>
 </body>
 </html>

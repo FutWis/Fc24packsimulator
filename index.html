@@ -25,7 +25,19 @@
                 storedImages = JSON.parse(storedImagesJSON);
             }
         }
+// Function to store an image URL in local storage
+function storeImage(imageUrl) {
+            if (imageUrl) {
+                const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+                storedImages.push(imageUrl);
+                localStorage.setItem('storedImages', JSON.stringify(storedImages));
+            }
+        }
 
+        // Function to view stored images
+        function viewImages() {
+            window.open('fc24club.html', '_blank');
+        }
         // Function to save stored images to localStorage
         function saveStoredImages() {
             localStorage.setItem('storedImages', JSON.stringify(storedImages));
