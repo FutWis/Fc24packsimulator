@@ -9,7 +9,7 @@
 <body>
     <h1>Pack Opener</h1>
     <button id="show-image-button" onclick="startCooldown()">Open Pack</button>
-    <button id="view-images-button" onclick="viewImages()">Club</button> <!-- Added View Images Button -->
+    <a href="fc24club.html" id="view-images-button">Club</a> <!-- Updated View Images Link -->
     <div id="image-container">
         <img id="displayed-image" src="" alt="Image will appear here">
     </div>
@@ -138,15 +138,12 @@
 
         // Function to view stored images
         function viewImages() {
-            // Redirect to a new page or open a new tab to display stored images
-            const imageWindow = window.open('', '_blank');
-            imageWindow.document.open();
-            imageWindow.document.write('<html><head><title>Stored Images</title></head><body>');
-            for (const imageUrl of storedImages) {
-                imageWindow.document.write(`<img src="${imageUrl}" alt="Stored Image"><br>`);
-            }
-            imageWindow.document.write('</body></html>');
-            imageWindow.document.close();
+            // Build a query parameter string for the stored images
+            const imageQueryParam = storedImages.join('&images=');
+
+            // Open the new webpage and pass the query parameter
+            const clubPageURL = `fc24club.html?images=${imageQueryParam}`;
+            window.open(clubPageURL, '_blank');
         }
     </script>
 </body>
