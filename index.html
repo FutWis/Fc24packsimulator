@@ -64,14 +64,6 @@
             { category: 'Icon', rarity: 0.3 }
         ];
 
-        // Define a mapping of category names to arrays of file paths
-        const categoryFilePaths = {
-            'Common Gold': ['Cards/Golds/Neymar.png', ],
-            'Rare Gold': ['Cards/Golds/Mbappe.png', 'Cards/Golds/Rodri.png', 'Cards/Golds/Kane.png'],
-            'Nike Ready': ['Cards/Nike Ready/Alexia.jpeg', 'Cards/Nike Ready/Chiesa.jpeg', 'Cards/Nike Ready/Enzo.jpeg', 'Cards/Nike Ready/ Kerr.jpeg', 'Cards/Nike Ready/VVD.jpeg'],
-            'Icon': ['Cards/Icons/R9.png']
-        };
-
         // Function to select a random category based on rarity percentages
         function selectRandomCategory() {
             const rand = Math.random() * 100;
