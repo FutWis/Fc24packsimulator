@@ -8,91 +8,61 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-
-    <!-- Create a section for each rarity category -->
+    
+    <!-- Common Gold Section -->
     <div id="common-gold" class="rarity-section">
         <h2>Common Gold</h2>
-        <div id="common-gold-images" class="image-container"></div>
+        <div id="common-gold-images" class="image-container">
+            <!-- Images for Common Gold rarity category will be loaded dynamically here -->
+        </div>
     </div>
 
+    <!-- Rare Gold Section -->
     <div id="rare-gold" class="rarity-section">
         <h2>Rare Gold</h2>
-        <div id="rare-gold-images" class="image-container"></div>
+        <div id="rare-gold-images" class="image-container">
+            <!-- Images for Rare Gold rarity category will be loaded dynamically here -->
+        </div>
     </div>
 
+    <!-- Nike Ready Section -->
     <div id="nike-ready" class="rarity-section">
         <h2>Nike Ready</h2>
-        <div id="nike-ready-images" class="image-container"></div>
+        <div id="nike-ready-images" class="image-container">
+            <!-- Images for Nike Ready rarity category will be loaded dynamically here -->
+        </div>
     </div>
 
+    <!-- Icon Section -->
     <div id="icon" class="rarity-section">
         <h2>Icon</h2>
-        <div id="icon-images" class="image-container"></div>
+        <div id="icon-images" class="image-container">
+            <!-- Images for Icon rarity category will be loaded dynamically here -->
+        </div>
     </div>
 
     <script>
-        let storedImages = []; // Define the storedImages array
-
-        // Load stored images from localStorage
-        function loadStoredImages() {
-            const storedImagesJSON = localStorage.getItem('storedImages');
+        // Function to load and display images from local storage
+        function loadImagesFromLocalStorage(categoryId) {
+            const storedImagesJSON = localStorage.getItem(categoryId);
             if (storedImagesJSON) {
-                storedImages = JSON.parse(storedImagesJSON);
-                displayImagesByRarity(); // Call the function to display images by rarity
+                const storedImages = JSON.parse(storedImagesJSON);
+                const imageContainer = document.getElementById(categoryId + "-images");
+
+                storedImages.forEach((imageSrc) => {
+                    const image = document.createElement("img");
+                    image.src = imageSrc;
+                    image.alt = "Image";
+                    imageContainer.appendChild(image);
+                });
             }
         }
 
-        // Function to display images by rarity
-        function displayImagesByRarity() {
-            // Group images by rarity
-            const groupedImages = {
-                'Common Gold': [],
-                'Rare Gold': [],
-                'Nike Ready': [],
-                'Icon': []
-            };
-
-            // Sort the images into their respective rarity categories
-            for (const imageUrl of storedImages) {
-                for (const category of imageCategories) {
-                    if (categoryFilePaths[category.category].includes(imageUrl)) {
-                        groupedImages[category.category].push(imageUrl);
-                        break;
-                    }
-                }
-            }
-
-            // Display images in their respective sections
-            for (const category of imageCategories) {
-                const categoryImages = groupedImages[category.category];
-                const container = document.getElementById(category.category.toLowerCase() + '-images');
-                if (container && categoryImages.length > 0) {
-                    for (const imageUrl of categoryImages) {
-                        const image = document.createElement('img');
-                        image.src = imageUrl;
-                        container.appendChild(image);
-                    }
-                }
-            }
-        }
-
-        // Define image categories and their rarity percentages (same as in index.html)
-        const imageCategories = [
-            { category: 'Common Gold', rarity: 80 },
-            { category: 'Rare Gold', rarity: 13 },
-            { category: 'Nike Ready', rarity: 6.7 },
-            { category: 'Icon', rarity: 0.3 }
-        ];
-
-        // Define a mapping of category names to arrays of file paths (same as in index.html)
-        const categoryFilePaths = {
-            'Common Gold': ['Cards/Golds/Neymar.png'],
-            'Rare Gold': ['Cards/Golds/Mbappe.png', 'Cards/Golds/Rodri.png', 'Cards/Golds/Kane.png'],
-            'Nike Ready': ['Cards/Nike Ready/Alexia.jpeg', 'Cards/Nike Ready/Chiesa.jpeg', 'Cards/Nike Ready/Enzo.jpeg', 'Cards/Nike Ready/ Kerr.jpeg', 'Cards/Nike Ready/VVD.jpeg'],
-            'Icon': ['Cards/Icons/R9.png']
-        };
-
-        loadStoredImages(); // Load and display stored images by rarity
+        // Load images for each category
+        loadImagesFromLocalStorage("common-gold");
+        loadImagesFromLocalStorage("rare-gold");
+        loadImagesFromLocalStorage("nike-ready");
+        loadImagesFromLocalStorage("icon");
     </script>
 </body>
 </html>
