@@ -64,15 +64,15 @@
                 confetti.style.top = `${Math.random() * 100}%`;
                 imageContainer.appendChild(confetti);
             }
-        }
-          // Remove confetti elements after 2 seconds
-          setTimeout(() => {
+
+            // Remove confetti elements after 2 seconds
+            setTimeout(() => {
                 const confettiElements = document.querySelectorAll('.confetti');
                 confettiElements.forEach((confetti) => {
                     confetti.remove();
                 });
             }, 2000); // Adjust the time to match the duration of confetti animation
-        
+        }
 
         // Function to display a random image from the selected category
         function showRandomImage() {
