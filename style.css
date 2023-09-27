@@ -39,8 +39,8 @@ button {
 .confetti {
     width: 10px;
     height: 10px;
-    background-color: rgb(196, 206, 5); /* Change this to the desired confetti color */
+    background-color: rgb(255, 213, 0); /* Change this to the desired confetti color */
     position: absolute;
-    animation: confetti-fall 4s linear infinite;
+    animation: confetti-fall 2s linear infinite;
     opacity: 0.7;
 }
