@@ -7,11 +7,6 @@ body {
     background-size: cover; /* This will cover the entire viewport */
     background-repeat: no-repeat; /* Prevent the image from repeating */
 }
-img {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 10px;
-}
 h1 {
     font-size: 36px;
     margin-bottom: 50px;
