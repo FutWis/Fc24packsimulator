@@ -16,7 +16,23 @@
 
     <script>
         let buttonCooldown = false;
-        const storedImages = []; // Array to store images
+        let storedImages = [];
+
+        // Function to load stored images from localStorage
+        function loadStoredImages() {
+            const storedImagesJSON = localStorage.getItem('storedImages');
+            if (storedImagesJSON) {
+                storedImages = JSON.parse(storedImagesJSON);
+            }
+        }
+
+        // Function to save stored images to localStorage
+        function saveStoredImages() {
+            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+        }
+
+        // Load stored images when the page loads
+        loadStoredImages();
 
         // Define image categories and their rarity percentages
         const imageCategories = [
@@ -123,7 +139,6 @@
         // Function to view stored images
         function viewImages() {
             // Redirect to a new page or open a new tab to display stored images
-            // Here, we will open the images in a new tab
             const imageWindow = window.open('', '_blank');
             imageWindow.document.open();
             imageWindow.document.write('<html><head><title>Stored Images</title></head><body>');
