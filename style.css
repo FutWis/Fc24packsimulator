@@ -3,6 +3,9 @@ body {
     text-align: center;
     margin-top: 50px;
     font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Replace 'background.jpg' with your image file name or path */
+    background-size: cover; /* This will cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
 }
 img {
     max-width: 200px;
@@ -22,12 +25,4 @@ button {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-}
-background-image {
-    background-image: url('background.jpg'); /* Replace with your image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    height: 100vh; /* Ensure the background covers the entire viewport */
 }
