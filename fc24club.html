@@ -20,18 +20,21 @@
         }
 
         // Function to display stored images
-        function displayStoredImages() {
-            const queryParameters = getQueryParameters();
-            const images = queryParameters.images ? queryParameters.images.split('&images=') : [];
+function displayStoredImages() {
+    const queryParameters = getQueryParameters();
+    const images = queryParameters.images ? queryParameters.images.split('&images=') : [];
 
-            const clubImagesContainer = document.getElementById('club-images-container');
-            for (const imageUrl of images) {
-                const imageElement = document.createElement('img');
-                imageElement.src = imageUrl;
-                imageElement.alt = 'Stored Image';
-                clubImagesContainer.appendChild(imageElement);
-            }
-        }
+    console.log('Images received:', images); // Add this line for debugging
+
+    const clubImagesContainer = document.getElementById('club-images-container');
+    for (const imageUrl of images) {
+        const imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+        imageElement.alt = 'Stored Image';
+        clubImagesContainer.appendChild(imageElement);
+    }
+}
+
 
         // Load and display stored images when the page loads
         displayStoredImages();
