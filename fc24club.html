@@ -8,32 +8,33 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    <div id="club-images-container">
-        <!-- Images will be displayed here -->
+    <div id="club-image-container">
+        <!-- JavaScript will populate this container with images from localStorage -->
     </div>
 
     <script>
-          // Function to display stored images
-    function displayStoredImages() {
-        const storedImagesJSON = localStorage.getItem('storedImages');
-        const clubImagesContainer = document.getElementById('club-images-container');
-        
-        if (storedImagesJSON) {
-            const storedImages = JSON.parse(storedImagesJSON);
-            
-            for (const imageUrl of storedImages) {
-                const imageElement = document.createElement('img');
-                imageElement.src = imageUrl;
-                imageElement.alt = 'Stored Image';
-                clubImagesContainer.appendChild(imageElement);
+        // Function to load stored images from localStorage and filter duplicates
+        function loadClubImages() {
+            const storedImagesJSON = localStorage.getItem('storedImages');
+            if (storedImagesJSON) {
+                const storedImages = JSON.parse(storedImagesJSON);
+
+                // Create a Set to filter out duplicates
+                const uniqueImages = [...new Set(storedImages)];
+
+                // Display unique images
+                const clubImageContainer = document.getElementById('club-image-container');
+                uniqueImages.forEach((imageUrl) => {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = 'Image from Club';
+                    clubImageContainer.appendChild(img);
+                });
             }
         }
-    }
 
-    // Call the displayStoredImages function when the page loads
-    document.addEventListener('DOMContentLoaded', function () {
-        displayStoredImages();
-    });
+        // Load and display club images when the page loads
+        loadClubImages();
     </script>
 </body>
 </html>
