@@ -1,4 +1,3 @@
-<!-- fc24club.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +8,13 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    <div id="club-images-container"></div>
+    <div id="club-images-container">
+        <!-- Images will be displayed here -->
+    </div>
 
     <script>
         // Function to display stored images
         function displayStoredImages() {
-            const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
             const clubImagesContainer = document.getElementById('club-images-container');
             
             for (const imageUrl of storedImages) {

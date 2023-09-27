@@ -18,30 +18,47 @@
         let buttonCooldown = false;
         let storedImages = [];
 
-        // Function to load stored images from localStorage
-        function loadStoredImages() {
-            const storedImagesJSON = localStorage.getItem('storedImages');
-            if (storedImagesJSON) {
-                storedImages = JSON.parse(storedImagesJSON);
-            }
-        }
-// Function to store an image URL in local storage
-function storeImage(imageUrl) {
-            if (imageUrl) {
-                const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
-                storedImages.push(imageUrl);
-                localStorage.setItem('storedImages', JSON.stringify(storedImages));
-            }
-        }
+// Function to load stored images from localStorage
+function loadStoredImages() {
+    const storedImagesJSON = localStorage.getItem('storedImages');
+    if (storedImagesJSON) {
+        storedImages = JSON.parse(storedImagesJSON);
+    }
+}
 
-        // Function to view stored images
-        function viewImages() {
-            window.open('fc24club.html', '_blank');
-        }
-        // Function to save stored images to localStorage
-        function saveStoredImages() {
-            localStorage.setItem('storedImages', JSON.stringify(storedImages));
-        }
+// Function to save stored images to localStorage
+function saveStoredImages() {
+    localStorage.setItem('storedImages', JSON.stringify(storedImages));
+}
+
+// Load stored images when the page loads
+loadStoredImages();
+
+// Define image categories and their rarity percentages (your existing image categories)
+
+// Function to display a random image from the selected category
+function showRandomImage() {
+    // Simulate getting a random image URL (replace with your logic)
+    const randomImageUrl = 'https://example.com/random-image.png';
+
+    // Display the image
+    const displayedImage = document.getElementById('displayed-image');
+    displayedImage.src = randomImageUrl;
+    displayedImage.style.display = 'block';
+    displayedImage.style.width = '400px'; // Adjust the width as needed
+    displayedImage.style.height = '400px'; // Adjust the height as needed
+    displayedImage.style.margin = '0 auto'; // Center the image horizontally
+    displayedImage.style.marginTop = '50px'; // Adjust the top margin as needed
+
+    // Store the displayed image in the array
+    storedImages.push(randomImageUrl);
+    saveStoredImages();
+}
+
+// Function to view stored images
+function viewImages() {
+    window.open('fc24club.html', '_blank');
+}
 
         // Load stored images when the page loads
         loadStoredImages();
