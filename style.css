@@ -1,0 +1,25 @@
+
+body {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+}
+h1 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #4CAF50;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
