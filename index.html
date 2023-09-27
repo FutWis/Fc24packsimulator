@@ -9,12 +9,14 @@
 <body>
     <h1>Pack Opener</h1>
     <button id="show-image-button" onclick="startCooldown()">Open Pack</button>
+    <button id="view-images-button" onclick="viewImages()">Club</button> <!-- Added View Images Button -->
     <div id="image-container">
         <img id="displayed-image" src="" alt="Image will appear here">
     </div>
 
     <script>
         let buttonCooldown = false;
+        const storedImages = []; // Array to store images
 
         // Define image categories and their rarity percentages
         const imageCategories = [
@@ -73,7 +75,7 @@
                 confettiElements.forEach((confetti) => {
                     confetti.remove();
                 });
-            }, 2000); // Adjust the time to match the duration of confetti animation
+            }, 2000); // Adjust the time to match the duration of the confetti animation
         }
 
         // Function to display a random image from the selected category
@@ -96,6 +98,9 @@
                     displayedImage.style.height = '400px'; // Adjust the height as needed
                     displayedImage.style.margin = '0 auto'; // Center the image horizontally
                     displayedImage.style.marginTop = '50px'; // Adjust the top margin as needed
+
+                    // Store the displayed image in the array
+                    storedImages.push(selectedImage);
                 } else {
                     document.getElementById('displayed-image').src = '';
                 }
@@ -113,6 +118,20 @@
                 }, 3000); // 3-second cooldown
                 showRandomImage();
             }
+        }
+
+        // Function to view stored images
+        function viewImages() {
+            // Redirect to a new page or open a new tab to display stored images
+            // Here, we will open the images in a new tab
+            const imageWindow = window.open('', '_blank');
+            imageWindow.document.open();
+            imageWindow.document.write('<html><head><title>Stored Images</title></head><body>');
+            for (const imageUrl of storedImages) {
+                imageWindow.document.write(`<img src="${imageUrl}" alt="Stored Image"><br>`);
+            }
+            imageWindow.document.write('</body></html>');
+            imageWindow.document.close();
         }
     </script>
 </body>
