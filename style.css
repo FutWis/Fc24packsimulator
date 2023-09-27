@@ -23,3 +23,11 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+background-image {
+    background-image: url('background.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh; /* Ensure the background covers the entire viewport */
+}
