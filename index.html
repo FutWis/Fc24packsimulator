@@ -54,8 +54,21 @@
         }
 
        // Function to display a random image from the selected category
-function showRandomImage() {
-    const imageContainer = document.getElementById('image-container');
+       function showRandomImage() {
+            const selectedCategory = selectRandomCategory();
+            const selectedImage = selectRandomImage(selectedCategory.category);
+            if (selectedImage) {
+                const displayedImage = document.getElementById('displayed-image');
+                displayedImage.src = selectedImage;
+                displayedImage.style.display = 'block';
+                displayedImage.style.width = '400px'; // Adjust the width as needed
+                displayedImage.style.height = '400px'; // Adjust the height as needed
+                displayedImage.style.margin = '0 auto'; // Center the image horizontally
+                displayedImage.style.marginTop = '50px'; // Adjust the top margin as needed
+            } else {
+                document.getElementById('displayed-image').src = '';
+            }
+        }
     
     // Create and append confetti elements
     const confettiCount = 50; // Adjust the number of confetti particles as needed
