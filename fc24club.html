@@ -13,9 +13,13 @@
     </div>
 
     <script>
-        // Function to display stored images
-        function displayStoredImages() {
-            const clubImagesContainer = document.getElementById('club-images-container');
+          // Function to display stored images
+    function displayStoredImages() {
+        const storedImagesJSON = localStorage.getItem('storedImages');
+        const clubImagesContainer = document.getElementById('club-images-container');
+        
+        if (storedImagesJSON) {
+            const storedImages = JSON.parse(storedImagesJSON);
             
             for (const imageUrl of storedImages) {
                 const imageElement = document.createElement('img');
@@ -24,11 +28,12 @@
                 clubImagesContainer.appendChild(imageElement);
             }
         }
+    }
 
-        // Call the displayStoredImages function when the page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            displayStoredImages();
-        });
+    // Call the displayStoredImages function when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        displayStoredImages();
+    });
     </script>
 </body>
 </html>

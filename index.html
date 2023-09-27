@@ -165,15 +165,13 @@ function viewImages() {
             }
         }
 
-        // Function to view stored images
-        function viewImages() {
-            // Build a query parameter string for the stored images
-            const imageQueryParam = storedImages.join('&images=');
-
-            // Open the new webpage and pass the query parameter
-            const clubPageURL = `fc24club.html?images=${imageQueryParam}`;
-            window.open(clubPageURL, '_blank');
-        }
+    // Function to view stored images
+    function viewImages() {
+        // Store the storedImages array in localStorage
+        localStorage.setItem('storedImages', JSON.stringify(storedImages));
+        window.open('fc24club.html', '_blank');
+    }
+        
     </script>
 </body>
 </html>
