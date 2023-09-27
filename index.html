@@ -18,89 +18,21 @@
         let buttonCooldown = false;
         let storedImages = [];
 
-// Function to load stored images from localStorage
-function loadStoredImages() {
-    const storedImagesJSON = localStorage.getItem('storedImages');
-    if (storedImagesJSON) {
-        storedImages = JSON.parse(storedImagesJSON);
-    }
-}
+        // Function to load stored images from localStorage
+        function loadStoredImages() {
+            const storedImagesJSON = localStorage.getItem('storedImages');
+            if (storedImagesJSON) {
+                storedImages = JSON.parse(storedImagesJSON);
+            }
+        }
 
-// Function to save stored images to localStorage
-function saveStoredImages() {
-    localStorage.setItem('storedImages', JSON.stringify(storedImages));
-}
-
-// Load stored images when the page loads
-loadStoredImages();
-
-// Define image categories and their rarity percentages (your existing image categories)
-
-// Function to display a random image from the selected category
-function showRandomImage() {
-    // Simulate getting a random image URL (replace with your logic)
-    const randomImageUrl = 'https://example.com/random-image.png';
-
-    // Display the image
-    const displayedImage = document.getElementById('displayed-image');
-    displayedImage.src = randomImageUrl;
-    displayedImage.style.display = 'block';
-    displayedImage.style.width = '400px'; // Adjust the width as needed
-    displayedImage.style.height = '400px'; // Adjust the height as needed
-    displayedImage.style.margin = '0 auto'; // Center the image horizontally
-    displayedImage.style.marginTop = '50px'; // Adjust the top margin as needed
-
-    // Store the displayed image in the array
-    storedImages.push(randomImageUrl);
-    saveStoredImages();
-}
-
-// Function to view stored images
-function viewImages() {
-    window.open('fc24club.html', '_blank');
-}
+        // Function to save stored images to localStorage
+        function saveStoredImages() {
+            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+        }
 
         // Load stored images when the page loads
         loadStoredImages();
-
-        // Define image categories and their rarity percentages
-        const imageCategories = [
-            { category: 'Common Gold', rarity: 80 },
-            { category: 'Rare Gold', rarity: 13 },
-            { category: 'Nike Ready', rarity: 6.7 },
-            { category: 'Icon', rarity: 0.3 }
-        ];
-
-        // Define a mapping of category names to arrays of file paths
-        const categoryFilePaths = {
-            'Common Gold': ['Cards/Golds/Neymar.png', ],
-            'Rare Gold': ['Cards/Golds/Mbappe.png', 'Cards/Golds/Rodri.png', 'Cards/Golds/Kane.png'],
-            'Nike Ready': ['Cards/Nike Ready/Alexia.jpeg', 'Cards/Nike Ready/Chiesa.jpeg', 'Cards/Nike Ready/Enzo.jpeg', 'Cards/Nike Ready/ Kerr.jpeg', 'Cards/Nike Ready/VVD.jpeg'],
-            'Icon': ['Cards/Icons/R9.png']
-        };
-
-        // Function to select a random category based on rarity percentages
-        function selectRandomCategory() {
-            const rand = Math.random() * 100;
-            let cumulativeProbability = 0;
-            
-            for (const category of imageCategories) {
-                cumulativeProbability += category.rarity;
-                if (rand <= cumulativeProbability) {
-                    return category;
-                }
-            }
-        }
-
-        // Function to select a random image from the selected category
-        function selectRandomImage(category) {
-            const images = categoryFilePaths[category];
-            if (images && images.length > 0) {
-                const randomIndex = Math.floor(Math.random() * images.length);
-                return images[randomIndex];
-            }
-            return null;
-        }
 
         // Function to create confetti elements
         function createConfetti() {
@@ -123,6 +55,23 @@ function viewImages() {
             }, 2000); // Adjust the time to match the duration of the confetti animation
         }
 
+        // Define image categories and their rarity percentages (your existing image categories)
+
+        const imageCategories = [
+            { category: 'Common Gold', rarity: 80 },
+            { category: 'Rare Gold', rarity: 13 },
+            { category: 'Nike Ready', rarity: 6.7 },
+            { category: 'Icon', rarity: 0.3 }
+        ];
+
+        // Define a mapping of category names to arrays of file paths
+        const categoryFilePaths = {
+            'Common Gold': ['Cards/Golds/Neymar.png', ],
+            'Rare Gold': ['Cards/Golds/Mbappe.png', 'Cards/Golds/Rodri.png', 'Cards/Golds/Kane.png'],
+            'Nike Ready': ['Cards/Nike Ready/Alexia.jpeg', 'Cards/Nike Ready/Chiesa.jpeg', 'Cards/Nike Ready/Enzo.jpeg', 'Cards/Nike Ready/ Kerr.jpeg', 'Cards/Nike Ready/VVD.jpeg'],
+            'Icon': ['Cards/Icons/R9.png']
+        };
+
         // Function to display a random image from the selected category
         function showRandomImage() {
             // Hide the card immediately
@@ -131,7 +80,7 @@ function viewImages() {
             // Create and append confetti elements
             createConfetti();
 
-            // After the confetti animation, display the card after 2 seconds
+            // After the confetti animation, display the card after 2 seconds (your existing code)
             setTimeout(() => {
                 const selectedCategory = selectRandomCategory();
                 const selectedImage = selectRandomImage(selectedCategory.category);
@@ -146,6 +95,7 @@ function viewImages() {
 
                     // Store the displayed image in the array
                     storedImages.push(selectedImage);
+                    saveStoredImages(); // Save the stored images to localStorage
                 } else {
                     document.getElementById('displayed-image').src = '';
                 }
@@ -165,13 +115,12 @@ function viewImages() {
             }
         }
 
-    // Function to view stored images
-    function viewImages() {
-        // Store the storedImages array in localStorage
-        localStorage.setItem('storedImages', JSON.stringify(storedImages));
-        window.open('fc24club.html', '_blank');
-    }
-        
+        // Function to view stored images
+        function viewImages() {
+            // Store the storedImages array in localStorage
+            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+            window.open('fc24club.html', '_blank');
+        }
     </script>
 </body>
 </html>
