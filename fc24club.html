@@ -76,6 +76,22 @@
             }
         }
 
+        // Define image categories and their rarity percentages (same as in index.html)
+        const imageCategories = [
+            { category: 'Common Gold', rarity: 80 },
+            { category: 'Rare Gold', rarity: 13 },
+            { category: 'Nike Ready', rarity: 6.7 },
+            { category: 'Icon', rarity: 0.3 }
+        ];
+
+        // Define a mapping of category names to arrays of file paths (same as in index.html)
+        const categoryFilePaths = {
+            'Common Gold': ['Cards/Golds/Neymar.png'],
+            'Rare Gold': ['Cards/Golds/Mbappe.png', 'Cards/Golds/Rodri.png', 'Cards/Golds/Kane.png'],
+            'Nike Ready': ['Cards/Nike Ready/Alexia.jpeg', 'Cards/Nike Ready/Chiesa.jpeg', 'Cards/Nike Ready/Enzo.jpeg', 'Cards/Nike Ready/ Kerr.jpeg', 'Cards/Nike Ready/VVD.jpeg'],
+            'Icon': ['Cards/Icons/R9.png']
+        };
+
         loadStoredImages(); // Load and display stored images by rarity
     </script>
 </body>
