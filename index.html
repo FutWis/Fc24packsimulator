@@ -8,12 +8,14 @@
 </head>
 <body>
     <h1>Pack Opener</h1>
-    <button id="show-image-button">Open Pack</button>
+    <button id="show-image-button" onclick="startCooldown()">Open Pack</button>
     <div id="image-container">
         <img id="displayed-image" src="" alt="Image will appear here">
     </div>
 
     <script>
+        let buttonCooldown = false;
+
         // Define image categories and their rarity percentages
         const imageCategories = [
             { category: 'Common Gold', rarity: 80 },
@@ -53,8 +55,8 @@
             return null;
         }
 
-         // Function to create confetti elements
-         function createConfetti() {
+        // Function to create confetti elements
+        function createConfetti() {
             const confettiCount = 50; // Adjust the number of confetti particles as needed
             const imageContainer = document.getElementById('image-container');
             for (let i = 0; i < confettiCount; i++) {
@@ -100,8 +102,18 @@
             }, 2000); // Adjust the time to match your desired delay
         }
 
-        // Add click event listener to the button
-        document.getElementById('show-image-button').addEventListener('click', showRandomImage);
+        // Function to start the button cooldown
+        function startCooldown() {
+            if (!buttonCooldown) {
+                document.getElementById('show-image-button').disabled = true;
+                buttonCooldown = true;
+                setTimeout(() => {
+                    document.getElementById('show-image-button').disabled = false;
+                    buttonCooldown = false;
+                }, 3000); // 3-second cooldown
+                showRandomImage();
+            }
+        }
     </script>
 </body>
 </html>
