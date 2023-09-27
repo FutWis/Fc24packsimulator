@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FC24 Pack Opener</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button onclick="getRandomImage()">Open Pack</button>
+    <br><br>
+    <img id="image" src="">
+    <script>
+      var packedImages = JSON.parse(localStorage.getItem('packedImages')) || [];
+
+      function getRandomImage() {
+        var image = document.getElementById("image");
+        var randomNum = Math.random();
+        var highProbImages = [
+         
+
+        ];
+        var lowProbImages = [
+        
+        ];
+        if (randomNum < 0.95) {
+          // get image with 95% chance
+          var imageUrl = highProbImages[Math.floor(Math.random() * highProbImages.length)];
+        } else {
+          // get image with 5% chance
+          var imageUrl = lowProbImages[Math.floor(Math.random() * lowProbImages.length)];
+        }
+        image.src = imageUrl;
+        if (packedImages.includes(imageUrl.split('/').pop())) {
+          // add to packed list and update local storage
+          packedImages.push(imageUrl.split('/').pop());
+          localStorage.setItem('packedImages', JSON.stringify(packedImages));
+        }
+      }
+    </script>
+  </body>
+</html>
