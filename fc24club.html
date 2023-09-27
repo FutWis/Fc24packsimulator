@@ -8,33 +8,73 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    <div id="club-image-container">
-        <!-- JavaScript will populate this container with images from localStorage -->
+
+    <!-- Create a section for each rarity category -->
+    <div id="common-gold" class="rarity-section">
+        <h2>Common Gold</h2>
+        <div id="common-gold-images" class="image-container"></div>
+    </div>
+
+    <div id="rare-gold" class="rarity-section">
+        <h2>Rare Gold</h2>
+        <div id="rare-gold-images" class="image-container"></div>
+    </div>
+
+    <div id="nike-ready" class="rarity-section">
+        <h2>Nike Ready</h2>
+        <div id="nike-ready-images" class="image-container"></div>
+    </div>
+
+    <div id="icon" class="rarity-section">
+        <h2>Icon</h2>
+        <div id="icon-images" class="image-container"></div>
     </div>
 
     <script>
-        // Function to load stored images from localStorage and filter duplicates
-        function loadClubImages() {
+        // Load stored images from localStorage
+        function loadStoredImages() {
             const storedImagesJSON = localStorage.getItem('storedImages');
             if (storedImagesJSON) {
-                const storedImages = JSON.parse(storedImagesJSON);
-
-                // Create a Set to filter out duplicates
-                const uniqueImages = [...new Set(storedImages)];
-
-                // Display unique images
-                const clubImageContainer = document.getElementById('club-image-container');
-                uniqueImages.forEach((imageUrl) => {
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    img.alt = 'Image from Club';
-                    clubImageContainer.appendChild(img);
-                });
+                storedImages = JSON.parse(storedImagesJSON);
+                displayImagesByRarity(); // Call the function to display images by rarity
             }
         }
 
-        // Load and display club images when the page loads
-        loadClubImages();
+        // Function to display images by rarity
+        function displayImagesByRarity() {
+            // Group images by rarity
+            const groupedImages = {
+                'Common Gold': [],
+                'Rare Gold': [],
+                'Nike Ready': [],
+                'Icon': []
+            };
+
+            // Sort the images into their respective rarity categories
+            for (const imageUrl of storedImages) {
+                for (const category of imageCategories) {
+                    if (categoryFilePaths[category.category].includes(imageUrl)) {
+                        groupedImages[category.category].push(imageUrl);
+                        break;
+                    }
+                }
+            }
+
+            // Display images in their respective sections
+            for (const category of imageCategories) {
+                const categoryImages = groupedImages[category.category];
+                const container = document.getElementById(category.category.toLowerCase() + '-images');
+                if (container && categoryImages.length > 0) {
+                    for (const imageUrl of categoryImages) {
+                        const image = document.createElement('img');
+                        image.src = imageUrl;
+                        container.appendChild(image);
+                    }
+                }
+            }
+        }
+
+        loadStoredImages(); // Load and display stored images by rarity
     </script>
 </body>
 </html>
