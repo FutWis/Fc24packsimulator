@@ -12,6 +12,9 @@
     <div id="club-images-container"></div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        displayStoredImages();
+    });
         // Function to extract query parameters from the URL
         function getQueryParameters() {
             const queryString = window.location.search;
