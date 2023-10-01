@@ -8,61 +8,33 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    
-    <!-- Common Gold Section -->
-    <div id="common-gold" class="rarity-section">
-        <h2>Common Gold</h2>
-        <div id="common-gold-images" class="image-container">
-            <!-- Images for Common Gold rarity category will be loaded dynamically here -->
-        </div>
-    </div>
-
-    <!-- Rare Gold Section -->
-    <div id="rare-gold" class="rarity-section">
-        <h2>Rare Gold</h2>
-        <div id="rare-gold-images" class="image-container">
-            <!-- Images for Rare Gold rarity category will be loaded dynamically here -->
-        </div>
-    </div>
-
-    <!-- Nike Ready Section -->
-    <div id="nike-ready" class="rarity-section">
-        <h2>Nike Ready</h2>
-        <div id="nike-ready-images" class="image-container">
-            <!-- Images for Nike Ready rarity category will be loaded dynamically here -->
-        </div>
-    </div>
-
-    <!-- Icon Section -->
-    <div id="icon" class="rarity-section">
-        <h2>Icon</h2>
-        <div id="icon-images" class="image-container">
-            <!-- Images for Icon rarity category will be loaded dynamically here -->
-        </div>
+    <div id="club-image-container">
+        <!-- JavaScript will populate this container with images from localStorage -->
     </div>
 
     <script>
-        // Function to load and display images from local storage
-        function loadImagesFromLocalStorage(categoryId) {
-            const storedImagesJSON = localStorage.getItem(categoryId);
+        // Function to load stored images from localStorage and filter duplicates
+        function loadClubImages() {
+            const storedImagesJSON = localStorage.getItem('storedImages');
             if (storedImagesJSON) {
                 const storedImages = JSON.parse(storedImagesJSON);
-                const imageContainer = document.getElementById(categoryId + "-images");
 
-                storedImages.forEach((imageSrc) => {
-                    const image = document.createElement("img");
-                    image.src = imageSrc;
-                    image.alt = "Image";
-                    imageContainer.appendChild(image);
+                // Create a Set to filter out duplicates
+                const uniqueImages = [...new Set(storedImages)];
+
+                // Display unique images
+                const clubImageContainer = document.getElementById('club-image-container');
+                uniqueImages.forEach((imageUrl) => {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = 'Image from Club';
+                    clubImageContainer.appendChild(img);
                 });
             }
         }
 
-        // Load images for each category
-        loadImagesFromLocalStorage("common-gold");
-        loadImagesFromLocalStorage("rare-gold");
-        loadImagesFromLocalStorage("nike-ready");
-        loadImagesFromLocalStorage("icon");
+        // Load and display club images when the page loads
+        loadClubImages();
     </script>
 </body>
 </html>
