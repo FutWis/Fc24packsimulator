@@ -15,14 +15,15 @@
 <body>
     <h1>FC24 Club</h1>
     <div id="club-images">
-        <!-- Display stored images from localStorage -->
+        <!-- Display stored unique images from localStorage -->
         <script>
             const storedImagesJSON = localStorage.getItem('storedImages');
             if (storedImagesJSON) {
                 const storedImages = JSON.parse(storedImagesJSON);
+                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
                 const clubImages = document.getElementById('club-images');
 
-                storedImages.forEach((imageURL) => {
+                uniqueImages.forEach((imageURL) => {
                     const image = document.createElement('img');
                     image.src = imageURL;
                     clubImages.appendChild(image);
