@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC24 Club</title>
-    <link rel="stylesheet" href="style.css" />
     <style>
         /* Define a CSS rule for images */
         img {
@@ -15,34 +14,21 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    <div id="club-image-container">
-        <!-- JavaScript will populate this container with images from localStorage -->
-    </div>
-
-    <script>
-    // Attach the function to the button click event
-    document.getElementById('clear-storage-button').addEventListener('click', clearStorage);
-        // Function to load stored images from localStorage and filter duplicates
-        function loadClubImages() {
+    <div id="club-images">
+        <!-- Display stored images from localStorage -->
+        <script>
             const storedImagesJSON = localStorage.getItem('storedImages');
             if (storedImagesJSON) {
                 const storedImages = JSON.parse(storedImagesJSON);
+                const clubImages = document.getElementById('club-images');
 
-                // Create a Set to filter out duplicates
-                const uniqueImages = [...new Set(storedImages)];
-
-                // Display unique images
-                const clubImageContainer = document.getElementById('club-image-container');
-                uniqueImages.forEach((imageUrl) => {
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    clubImageContainer.appendChild(img);
+                storedImages.forEach((imageURL) => {
+                    const image = document.createElement('img');
+                    image.src = imageURL;
+                    clubImages.appendChild(image);
                 });
             }
-        }
-
-        // Load and display club images when the page loads
-        loadClubImages();
-    </script>
+        </script>
+    </div>
 </body>
 </html>
