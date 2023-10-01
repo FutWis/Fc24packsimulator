@@ -15,19 +15,11 @@
 </head>
 <body>
     <h1>FC24 Club</h1>
-    <button id="clear-storage-button">Clear Cards</button>
     <div id="club-image-container">
         <!-- JavaScript will populate this container with images from localStorage -->
     </div>
 
     <script>
-         // Function to remove images from local storage
-    function clearStorage() {
-        localStorage.removeItem('storedImages');
-        // Optionally, you can clear the displayed images on the page as well
-        const imageContainer = document.getElementById('image-container');
-        imageContainer.innerHTML = ''; // Clear the image container
-    }
     // Attach the function to the button click event
     document.getElementById('clear-storage-button').addEventListener('click', clearStorage);
         // Function to load stored images from localStorage and filter duplicates
