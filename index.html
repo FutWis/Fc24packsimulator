@@ -44,17 +44,30 @@ const rarityColors = {
 };
 
 // Function to create confetti elements with different colors
-function createConfetti(selectedCategory) {
+function createConfetti(rarity) {
     const confettiCount = 50; // Adjust the number of confetti particles as needed
     const imageContainer = document.getElementById('image-container');
-    const confettiColor = rarityColors[selectedCategory] || 'gray'; // Default to gray if no matching rarity color
+    
+    // Define colors based on rarity
+    let confettiColor;
+    if (rarity === 'Common Gold') {
+        confettiColor = 'brown';
+    } else if (rarity === 'Rare Gold') {
+        confettiColor = 'gold';
+    } else if (rarity === 'Nike Ready') {
+        confettiColor = 'green';
+    } else if (rarity === 'Icon') {
+        confettiColor = 'white';
+    } else {
+        confettiColor = 'red'; // Default color for unknown rarity
+    }
 
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = `${Math.random() * 100}%`;
         confetti.style.top = `${Math.random() * 100}%`;
-        confetti.style.backgroundColor = confettiColor; // Set the background color based on rarity
+        confetti.style.backgroundColor = confettiColor; // Set the background color
         imageContainer.appendChild(confetti);
     }
 
@@ -67,13 +80,6 @@ function createConfetti(selectedCategory) {
     }, 2000); // Adjust the time to match the duration of the confetti animation
 }
 
-            // Remove confetti elements after 2 seconds
-            setTimeout(() => {
-                const confettiElements = document.querySelectorAll('.confetti');
-                confettiElements.forEach((confetti) => {
-                    confetti.remove();
-                });
-            }, 2000); // Adjust the time to match the duration of the confetti animation
         
 
         // Define image categories and their rarity percentages (your existing image categories)
