@@ -257,6 +257,22 @@
             localStorage.setItem('storedImages', JSON.stringify(storedImages));
             window.open('fc24club.html', '_blank');
         }
-    </script>
+
+       // Function to reveal all images in your club
+    function revealAllImages() {
+        const clubImages = document.querySelectorAll('.club-image');
+        clubImages.forEach((image) => {
+            image.style.display = 'block'; // Make the image visible
+        });
+    }
+
+    // Secret combination to unlock all images
+    document.addEventListener('keydown', (event) => {
+        if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+            // Call the function to reveal all images
+            revealAllImages();
+        }
+    });
+</script>
 </body>
 </html>
