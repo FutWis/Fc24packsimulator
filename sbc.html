@@ -63,9 +63,12 @@ uniqueImages.forEach((imageName) => {
         }
 
         // Function to complete an SBC challenge
-        function completeSBC(challengeName, requiredPlayers) {
+        // Function to complete an SBC challenge
+function completeSBC(challengeName, requiredPlayers) {
     // Check if the user has enough ICON players for the challenge
     const iconPlayersMatchingCategory = storedImages.filter(player => player.imageURL && player.imageURL.includes('Cards/Icons/'));
+
+    console.log('ICON Players Matching Category:', iconPlayersMatchingCategory); // Debugging line
 
     if (iconPlayersMatchingCategory.length >= requiredPlayers) {
         // Remove the required ICON players from the collection
