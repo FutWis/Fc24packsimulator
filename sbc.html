@@ -21,14 +21,13 @@
                 const clubImages = document.getElementById('club-images');
 
                 uniqueImages.forEach((imageName) => {
-    // Construct the complete image URL relative to the current page's location
-    const imageURL = imageName; // If the images are in the same directory
+                    // Construct the complete image URL relative to the current page's location
+                    const imageURL = imageName; // If the images are in the same directory
 
-    const image = document.createElement('img');
-    image.src = imageURL;
-    clubImages.appendChild(image);
-});
-
+                    const image = document.createElement('img');
+                    image.src = imageURL;
+                    clubImages.appendChild(image);
+                });
             }
         </script>
     </div>
