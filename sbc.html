@@ -63,7 +63,6 @@ uniqueImages.forEach((imageName) => {
         }
 
         // Function to complete an SBC challenge
-        // Function to complete an SBC challenge
         function completeSBC(challengeName, requiredPlayers) {
     // Check if the user has enough ICON players for the challenge
     const iconPlayersMatchingCategory = storedImages.filter(player => player.imageURL && player.imageURL.includes('Cards/Icons/'));
@@ -74,13 +73,8 @@ uniqueImages.forEach((imageName) => {
         // Reward the user with an image (replace 'rewardImageURL' with your image URL)
         const rewardImageURL = 'Cards/sbc/messiflashback.png';
 
-        // Check if the reward image already exists in the user's collection
-        const existingRewardIndex = storedImages.findIndex(player => player.name === `${challengeName} Reward`);
-        if (existingRewardIndex !== -1) {
-            // If it exists, replace it with the new reward
-            storedImages.splice(existingRewardIndex, 1, { name: `${challengeName} Reward`, imageURL: rewardImageURL });
-        } else {
-            // If it doesn't exist, add it to the collection
+        // Add the reward to the collection without removing duplicates
+        for (let i = 0; i < requiredPlayers; i++) {
             storedImages.push({ name: `${challengeName} Reward`, imageURL: rewardImageURL });
         }
 
@@ -100,6 +94,7 @@ uniqueImages.forEach((imageName) => {
     // Refresh the UI to reflect the changes
     displayPlayerCollection();
 }
+
 
 
 
