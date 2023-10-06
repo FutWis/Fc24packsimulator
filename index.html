@@ -11,6 +11,7 @@
     <button id="show-image-button" onclick="startCooldown()">Open Pack</button>
     <a href="fc24club.html" id="view-images-button">Club</a> <!-- Updated View Images Link -->
     <a href="sbc.html">SBC</a>
+    <img id="reward-image" src="" style="display: none;">
     <div id="image-container">
         <img id="displayed-image" src="">
     </div>
@@ -26,7 +27,7 @@ function checkReward() {
     if (iconCards.length >= 10) {
         // If the condition is met, display the reward image
         const rewardImage = document.getElementById('reward-image');
-        rewardImage.src = 'Cards/SBC/MessiFlashback.'; // Replace with the actual path to your reward image
+        rewardImage.src = 'Cards/SBC/MessiFlashback.jpeg'; // Replace with the actual path to your reward image
         rewardImage.style.display = 'block';
     }
 }
