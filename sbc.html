@@ -38,6 +38,12 @@
         </li>
     </ul>
 
+    <!-- Display the reward image -->
+    <div id="reward-image" style="display: none;">
+        <h2>Reward</h2>
+        <img id="reward" src="" alt="Reward" />
+    </div>
+
     <!-- Link back to the pack opener -->
     <a href="index.html">Back to Pack Opener</a>
 
@@ -62,8 +68,10 @@
                     storedImages.splice(index, 1);
                 }
 
-                // Reward the user (for simplicity, just add a "reward" to the collection)
-                storedImages.push({ name: `${challengeName} Reward` });
+                // Reward the user with an image
+                const rewardImage = document.getElementById('reward');
+                rewardImage.src = 'Cards/SBC/MessiFlashback.jpeg'; // Set the path to your reward image
+                document.getElementById('reward-image').style.display = 'block';
 
                 // Update the player collection in local storage
                 updatePlayerCollection();
