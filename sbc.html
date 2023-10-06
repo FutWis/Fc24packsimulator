@@ -49,58 +49,54 @@
 
     <script>
         // Modify the storedImages array to include player objects with a "category" property
-        const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
 
-        // Function to update the player collection in local storage
-        function updatePlayerCollection() {
-            localStorage.setItem('storedImages', JSON.stringify(storedImages)); // Update 'storedImages' in local storage
+// Function to complete an SBC challenge
+function completeSBC(challengeName, requiredPlayers) {
+    // Check if the user has enough ICON players for the challenge
+    const iconPlayersMatchingCategory = storedImages.filter(player => player.category === 'Icon');
+
+    if (iconPlayersMatchingCategory.length >= requiredPlayers) {
+        // Remove the required ICON players from the collection
+        for (let i = 0; i < requiredPlayers; i++) {
+            const index = storedImages.findIndex(player => player.category === 'Icon');
+            storedImages.splice(index, 1);
         }
 
-        // Function to complete an SBC challenge
-        function completeSBC(challengeName, requiredPlayers) {
-            // Check if the user has enough ICON players for the challenge
-            const iconPlayersMatchingCategory = storedImages.filter(image => image.includes('Cards/Icons/'));
+        // Reward the user with an image
+        const rewardImage = document.getElementById('reward');
+        rewardImage.src = 'Cards/SBC/MessiFlashback.jpeg'; // Set the path to your reward image
+        document.getElementById('reward-image').style.display = 'block';
 
-            if (iconPlayersMatchingCategory.length >= requiredPlayers) {
-                // Remove the required ICON players from the collection
-                for (let i = 0; i < requiredPlayers; i++) {
-                    const index = storedImages.findIndex(image => image.includes('Cards/Icons/'));
-                    storedImages.splice(index, 1);
-                }
+        // Update the player collection in local storage
+        updatePlayerCollection();
 
-                // Reward the user with an image
-                const rewardImage = document.getElementById('reward');
-                rewardImage.src = 'Cards/SBC/MessiFlashback.jpeg'; // Set the path to your reward image
-                document.getElementById('reward-image').style.display = 'block';
+        // Display a success message (you can improve this part)
+        alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
+    } else {
+        // Display an error message if the user doesn't meet the requirements
+        alert(`You don't have enough ICON players to complete "${challengeName}".`);
+    }
 
-                // Update the player collection in local storage
-                updatePlayerCollection();
+    // Refresh the UI to reflect the changes
+    displayPlayerCollection();
+}
 
-                // Display a success message (you can improve this part)
-                alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
-            } else {
-                // Display an error message if the user doesn't meet the requirements
-                alert(`You don't have enough ICON players to complete "${challengeName}".`);
-            }
+// Function to display the user's player collection
+function displayPlayerCollection() {
+    const playerCollectionList = document.getElementById('player-collection');
+    playerCollectionList.innerHTML = '';
 
-            // Refresh the UI to reflect the changes
-            displayPlayerCollection();
-        }
+    storedImages.forEach((player) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = player.name;
+        playerCollectionList.appendChild(listItem);
+    });
+}
 
-        // Function to display the user's player collection
-        function displayPlayerCollection() {
-            const playerCollectionList = document.getElementById('player-collection');
-            playerCollectionList.innerHTML = '';
+// Initialize the UI with the user's player collection
+displayPlayerCollection();
 
-            storedImages.forEach((player) => { // Use storedImages here
-                const listItem = document.createElement('li');
-                listItem.textContent = player.name;
-                playerCollectionList.appendChild(listItem);
-            });
-        }
-
-        // Initialize the UI with the user's player collection
-        displayPlayerCollection();
     </script>
 </body>
 </html>
