@@ -45,6 +45,11 @@
         // Modify the storedImages array to include player objects with a "category" property
         const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
 
+        // Function to update the player collection in local storage
+        function updatePlayerCollection() {
+            localStorage.setItem('storedImages', JSON.stringify(storedImages)); // Update 'storedImages' in local storage
+        }
+
         // Function to complete an SBC challenge
         function completeSBC(challengeName, requiredPlayers) {
             // Check if the user has enough ICON players for the challenge
