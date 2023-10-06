@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fc24 SBC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Squad Building Challenges</h1>
+    
+    <!-- Display the user's collection of player cards -->
+    <h2>Your Player Collection</h2>
+    <ul id="player-collection"></ul>
+
+    <!-- List available SBC challenges -->
+    <h2>Available SBC Challenges</h2>
+    <ul id="sbc-challenges">
+        <li>
+            Challenge 1: Collect 3 Gold Players
+            <button onclick="completeSBC('Challenge 1', 3)">Complete</button>
+        </li>
+        <li>
+            Challenge 2: Collect 2 Rare Players
+            <button onclick="completeSBC('Challenge 2', 2)">Complete</button>
+        </li>
+    </ul>
+
+    <script>
+        // Simulate a user's player collection using local storage
+        const playerCollection = JSON.parse(localStorage.getItem('playerCollection')) || [];
+
+        // Initialize SBC challenges and rewards
+        const sbcChallenges = [
+            { name: 'Challenge 1', requiredPlayers: 3 },
+            { name: 'Challenge 2', requiredPlayers: 2 },
+        ];
+
+        // Function to update the player collection in local storage
+        function updatePlayerCollection() {
+            localStorage.setItem('playerCollection', JSON.stringify(playerCollection));
+        }
+
+        // Function to complete an SBC challenge
+        function completeSBC(challengeName, requiredPlayers) {
+            // Check if the user has enough players for the challenge
+            if (playerCollection.length >= requiredPlayers) {
+                // Remove the required players from the collection
+                playerCollection.splice(0, requiredPlayers);
+
+                // Reward the user (for simplicity, just add a "reward" to the collection)
+                playerCollection.push({ name: `${challengeName} Reward` });
+
+                // Update the player collection in local storage
+                updatePlayerCollection();
+
+                // Display a success message (you can improve this part)
+                alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
+            } else {
+                // Display an error message if the user doesn't meet the requirements
+                alert(`You don't have enough players to complete "${challengeName}".`);
+            }
+
+            // Refresh the UI to reflect the changes
+            displayPlayerCollection();
+        }
+
+        // Function to display the user's player collection
+        function displayPlayerCollection() {
+            const playerCollectionList = document.getElementById('player-collection');
+            playerCollectionList.innerHTML = '';
+
+            playerCollection.forEach((player) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = player.name;
+                playerCollectionList.appendChild(listItem);
+            });
+        }
+
+        // Initialize the UI with the user's player collection
+        displayPlayerCollection();
+    </script>
+</body>
+</html>
