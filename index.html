@@ -19,6 +19,21 @@
         let buttonCooldown = false;
         let storedImages = [];
 
+        // Function to check for the reward condition and display the reward image
+function checkReward() {
+    // Check if there are at least 10 "Icon" cards in local storage
+    const iconCards = storedImages.filter(image => image.includes('Cards/Icons/'));
+    if (iconCards.length >= 10) {
+        // If the condition is met, display the reward image
+        const rewardImage = document.getElementById('reward-image');
+        rewardImage.src = 'path_to_reward_image.png'; // Replace with the actual path to your reward image
+        rewardImage.style.display = 'block';
+    }
+}
+
+// Call the checkReward function when the page loads
+checkReward();
+
         // Function to load stored images from localStorage
         function loadStoredImages() {
             const storedImagesJSON = localStorage.getItem('storedImages');
