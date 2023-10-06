@@ -11,7 +11,6 @@
     <button id="show-image-button" onclick="startCooldown()">Open Pack</button>
     <a href="fc24club.html" id="view-images-button">Club</a> <!-- Updated View Images Link -->
     <a href="sbc.html">SBC</a>
-    <img id="reward-image" src="" style="display: none;">
     <div id="image-container">
         <img id="displayed-image" src="">
     </div>
@@ -19,21 +18,6 @@
     <script>
         let buttonCooldown = false;
         let storedImages = [];
-
-        // Function to check for the reward condition and display the reward image
-function checkReward() {
-    // Check if there are at least 10 "Icon" cards in local storage
-    const iconCards = storedImages.filter(image => image.includes('Cards/Icons/'));
-    if (iconCards.length >= 10) {
-        // If the condition is met, display the reward image
-        const rewardImage = document.getElementById('reward-image');
-        rewardImage.src = 'Cards/SBC/MessiFlashback.jpeg'; // Replace with the actual path to your reward image
-        rewardImage.style.display = 'block';
-    }
-}
-
-// Call the checkReward function when the page loads
-checkReward();
 
         // Function to load stored images from localStorage
         function loadStoredImages() {

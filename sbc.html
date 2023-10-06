@@ -30,59 +30,50 @@
     </div>
 
     <!-- List available SBC challenges -->
-    <h2>Available SBC Challenges</h2>
-    <ul id="sbc-challenges">
-        <li>
-            Challenge 1: Collect 3 Gold Players
-            <button onclick="completeSBC('Challenge 1', 3)">Complete</button>
-        </li>
-        <li>
-            Challenge 2: Collect 2 Rare Players
-            <button onclick="completeSBC('Challenge 2', 2)">Complete</button>
-        </li>
-    </ul>
+<h2>Available SBC Challenges</h2>
+<ul id="sbc-challenges">
+    <li>
+        Challenge 1: Collect 10 ICON Players <!-- Updated challenge name -->
+        <button onclick="completeSBC('Challenge 3', 10)">Complete</button> <!-- Updated requiredPlayers value -->
+    </li>
+</ul>
 
     <!-- Link back to the pack opener -->
     <a href="index.html">Back to Pack Opener</a>
 
     <script>
-        // Simulate a user's player collection using local storage
-        const playerCollection = JSON.parse(localStorage.getItem('storedImages')) || [];
+        // Modify the storedImages array to include player objects with a "category" property
+const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
 
-        // Initialize SBC challenges and rewards
-        const sbcChallenges = [
-            { name: 'Challenge 1', requiredPlayers: 3 },
-            { name: 'Challenge 2', requiredPlayers: 2 },
-        ];
+// Function to complete an SBC challenge
+function completeSBC(challengeName, requiredPlayers) {
+    // Check if the user has enough ICON players for the challenge
+    const iconPlayersMatchingCategory = storedImages.filter(image => image.includes('Cards/Icons/'));
 
-        // Function to update the player collection in local storage
-        function updatePlayerCollection() {
-            localStorage.setItem('playerCollection', JSON.stringify(playerCollection));
+    if (iconPlayersMatchingCategory.length >= requiredPlayers) {
+        // Remove the required ICON players from the collection
+        for (let i = 0; i < requiredPlayers; i++) {
+            const index = storedImages.findIndex(image => image.includes('Cards/Icons/'));
+            storedImages.splice(index, 1);
         }
 
-        // Function to complete an SBC challenge
-        function completeSBC(challengeName, requiredPlayers) {
-            // Check if the user has enough players for the challenge
-            if (playerCollection.length >= requiredPlayers) {
-                // Remove the required players from the collection
-                playerCollection.splice(0, requiredPlayers);
+        // Reward the user (for simplicity, just add a "reward" to the collection)
+        storedImages.push({ name: `${challengeName} Reward` });
 
-                // Reward the user (for simplicity, just add a "reward" to the collection)
-                playerCollection.push({ name: `${challengeName} Reward` });
+        // Update the player collection in local storage
+        updatePlayerCollection();
 
-                // Update the player collection in local storage
-                updatePlayerCollection();
+        // Display a success message (you can improve this part)
+        alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
+    } else {
+        // Display an error message if the user doesn't meet the requirements
+        alert(`You don't have enough ICON players to complete "${challengeName}".`);
+    }
 
-                // Display a success message (you can improve this part)
-                alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
-            } else {
-                // Display an error message if the user doesn't meet the requirements
-                alert(`You don't have enough players to complete "${challengeName}".`);
-            }
+    // Refresh the UI to reflect the changes
+    displayPlayerCollection();
+}
 
-            // Refresh the UI to reflect the changes
-            displayPlayerCollection();
-        }
 
         // Function to display the user's player collection
         function displayPlayerCollection() {
