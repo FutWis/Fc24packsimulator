@@ -21,9 +21,11 @@
                 const clubImages = document.getElementById('club-images');
 
                 uniqueImages.forEach((imageURL) => {
-                    const image = document.createElement('img');
-                    image.src = imageURL;
-                    clubImages.appendChild(image);
+                    if (typeof imageURL === 'string') { // Check if imageURL is a string
+                        const image = document.createElement('img');
+                        image.src = imageURL;
+                        clubImages.appendChild(image);
+                    }
                 });
             }
         </script>
@@ -59,12 +61,12 @@
         // Function to complete an SBC challenge
         function completeSBC(challengeName, requiredPlayers) {
             // Check if the user has enough ICON players for the challenge
-            const iconPlayersMatchingCategory = storedImages.filter(player => player.imageURL && player.imageURL.includes('Cards/Icons/'));
+            const iconPlayersMatchingCategory = storedImages.filter(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
 
             if (iconPlayersMatchingCategory.length >= requiredPlayers) {
                 // Remove the required ICON players from the collection
                 for (let i = 0; i < requiredPlayers; i++) {
-                    const index = storedImages.findIndex(player => player.imageURL && player.imageURL.includes('Cards/Icons/'));
+                    const index = storedImages.findIndex(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
                     storedImages.splice(index, 1);
                 }
 
@@ -108,7 +110,7 @@
                 playerCollectionList.innerHTML = '';
 
                 storedImages.forEach((player) => {
-                    if (player.imageURL) {
+                    if (typeof player === 'object' && player.imageURL) {
                         const listItem = document.createElement('li');
                         const image = document.createElement('img');
                         image.src = player.imageURL;
