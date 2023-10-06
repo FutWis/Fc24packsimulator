@@ -20,11 +20,15 @@
                 const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
                 const clubImages = document.getElementById('club-images');
 
-                uniqueImages.forEach((imageURL) => {
-                    const image = document.createElement('img');
-                    image.src = imageURL;
-                    clubImages.appendChild(image);
-                });
+                uniqueImages.forEach((imageName) => {
+    // Construct the complete image URL relative to the current page's location
+    const imageURL = imageName; // If the images are in the same directory
+
+    const image = document.createElement('img');
+    image.src = imageURL;
+    clubImages.appendChild(image);
+});
+
             }
         </script>
     </div>
