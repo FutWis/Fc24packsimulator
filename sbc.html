@@ -59,70 +59,40 @@
         }
 
         // Function to complete an SBC challenge
-        function completeSBC(challengeName, requiredPlayers) {
-            // Check if the user has enough ICON players for the challenge
-            const iconPlayersMatchingCategory = storedImages.filter(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
+function completeSBC(challengeName, requiredPlayers) {
+    // Check if the user has enough ICON players for the challenge
+    const iconPlayersMatchingCategory = storedImages.filter(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
 
-            if (iconPlayersMatchingCategory.length >= requiredPlayers) {
-                // Remove the required ICON players from the collection
-                for (let i = 0; i < requiredPlayers; i++) {
-                    const index = storedImages.findIndex(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
-                    storedImages.splice(index, 1);
-                }
+    console.log('ICON Players Matching Category:', iconPlayersMatchingCategory);
 
-                // Reward the user with an image (replace 'rewardImageURL' with your image URL)
-                const rewardImageURL = 'Cards/SBC/MessiFlashback.jpeg';
-                storedImages.push({ name: `${challengeName} Reward`, imageURL: rewardImageURL });
-
-                // Update the player collection in local storage
-                updatePlayerCollection();
-
-                // Display the reward image
-                displayRewardImage(rewardImageURL);
-
-                // Display a success message (you can improve this part)
-                alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
-            } else {
-                // Display an error message if the user doesn't meet the requirements
-                alert(`You don't have enough ICON players to complete "${challengeName}".`);
-            }
-
-            // Refresh the UI to reflect the changes
-            displayPlayerCollection();
+    if (iconPlayersMatchingCategory.length >= requiredPlayers) {
+        // Remove the required ICON players from the collection
+        for (let i = 0; i < requiredPlayers; i++) {
+            const index = storedImages.findIndex(player => typeof player === 'object' && player.imageURL && player.imageURL.includes('Cards/Icons/'));
+            storedImages.splice(index, 1);
         }
 
-        // Function to display the reward image
-        function displayRewardImage(imageURL) {
-            const rewardContainer = document.getElementById('reward-container');
-            const rewardImage = document.getElementById('reward-image');
-            
-            // Set the source and display the reward container
-            rewardImage.src = imageURL;
-            rewardContainer.style.display = 'block';
-        }
+        // Reward the user with an image (replace 'rewardImageURL' with your image URL)
+        const rewardImageURL = 'Cards/SBC/MessiFlashback.jpeg';
+        storedImages.push({ name: `${challengeName} Reward`, imageURL: rewardImageURL });
 
-        // Function to display the user's player collection
-        function displayPlayerCollection() {
-            const playerCollectionList = document.getElementById('player-collection');
-            
-            // Check if the element exists before manipulating it
-            if (playerCollectionList) {
-                playerCollectionList.innerHTML = '';
+        // Update the player collection in local storage
+        updatePlayerCollection();
 
-                storedImages.forEach((player) => {
-                    if (typeof player === 'object' && player.imageURL) {
-                        const listItem = document.createElement('li');
-                        const image = document.createElement('img');
-                        image.src = player.imageURL;
-                        listItem.appendChild(image);
-                        playerCollectionList.appendChild(listItem);
-                    }
-                });
-            }
-        }
+        // Display the reward image
+        displayRewardImage(rewardImageURL);
 
-        // Initialize the UI with the user's player collection
-        displayPlayerCollection();
+        // Display a success message (you can improve this part)
+        alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
+    } else {
+        // Display an error message if the user doesn't meet the requirements
+        alert(`You don't have enough ICON players to complete "${challengeName}".`);
+    }
+
+    // Refresh the UI to reflect the changes
+    displayPlayerCollection();
+}
+
     </script>
 </body>
 </html>
