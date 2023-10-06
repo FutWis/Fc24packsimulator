@@ -79,7 +79,7 @@
             const playerCollectionList = document.getElementById('player-collection');
             playerCollectionList.innerHTML = '';
 
-            playerCollection.forEach((player) => {
+            storedImages.forEach((player) => { // Use storedImages here
                 const listItem = document.createElement('li');
                 listItem.textContent = player.name;
                 playerCollectionList.appendChild(listItem);
