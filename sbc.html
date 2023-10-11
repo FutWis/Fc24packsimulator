@@ -11,7 +11,7 @@
         <script>
             // Load stored images from local storage
             const storedImagesJSON = localStorage.getItem('storedImages');
-            const storedImages = storedImagesJSON ? JSON.parse(storedImagesJSON) : [];
+            const storedImages = storedImagesJSON ? new Set(JSON.parse(storedImagesJSON)) : new Set();
 
             const clubImages = document.getElementById('club-images');
 
@@ -46,7 +46,7 @@
 
         // Function to save stored images in local storage
         function saveStoredImages() {
-            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+            localStorage.setItem('storedImages', JSON.stringify(Array.from(storedImages)));
         }
 
         // Function to display SBC challenges
@@ -102,7 +102,7 @@
                     challenge.claimed = true;
 
                     // Add the image URL to the list of stored images
-                    storedImages.push('Cards/sbc/messiflashback.jpeg');
+                    storedImages.add('Cards/sbc/messiflashback.jpeg');
                     saveStoredImages(); // Save the updated stored images to localStorage
 
                     // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
