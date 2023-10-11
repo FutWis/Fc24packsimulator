@@ -82,7 +82,7 @@
         // Function to claim a reward for completing a challenge
 function claimReward(challenge) {
     // Count the number of icon images already collected
-    const iconCount = storedImages.filter(image => image.includes('/Icons/')).length;
+    const iconCount = storedImages.filter(image => image.includes('Cards/Icons/')).length;
 
     if (iconCount >= 10) {
         if (challenge.claimed) {
