@@ -9,18 +9,17 @@
 <body>
     <div id="club-images">
         <script>
+            // Load stored images from local storage
             const storedImagesJSON = localStorage.getItem('storedImages');
-            if (storedImagesJSON) {
-                const storedImages = JSON.parse(storedImagesJSON);
-                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
-                const clubImages = document.getElementById('club-images');
+            const storedImages = storedImagesJSON ? JSON.parse(storedImagesJSON) : [];
 
-                uniqueImages.forEach((imageURL) => {
-                    const image = document.createElement('img');
-                    image.src = imageURL;
-                    clubImages.appendChild(image);
-                });
-            }
+            const clubImages = document.getElementById('club-images');
+
+            storedImages.forEach((imageURL) => {
+                const image = document.createElement('img');
+                image.src = imageURL;
+                clubImages.appendChild(image);
+            });
         </script>
     </div>
 
@@ -44,6 +43,11 @@
 
         // Variable to track the number of icon images collected
         let iconImagesCollected = 10; // Assuming you have 10 icon images
+
+        // Function to save stored images in local storage
+        function saveStoredImages() {
+            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+        }
 
         // Function to display SBC challenges
         function displaySBCChallenges() {
