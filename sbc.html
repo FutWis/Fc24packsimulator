@@ -88,26 +88,34 @@ function claimReward(challenge) {
         if (challenge.claimed) {
             alert("You've already claimed the reward for this challenge.");
         } else {
-            alert(challenge.reward);
+            // Check if the reward image path is correct and the file exists
+            const rewardImagePath = 'Cards/sbc/messiflashback.jpeg';
+            const rewardImageExists = storedImages.includes(rewardImagePath);
 
-            const rewardImage = document.createElement('img');
-            rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
-            rewardImage.alt = 'Reward Image';
+            if (rewardImageExists) {
+                alert(challenge.reward);
 
-            const clubImages = document.getElementById('club-images');
-            clubImages.appendChild(rewardImage);
+                const rewardImage = document.createElement('img');
+                rewardImage.src = rewardImagePath;
+                rewardImage.alt = 'Reward Image';
 
-            challenge.claimed = true;
+                const clubImages = document.getElementById('club-images');
+                clubImages.appendChild(rewardImage);
 
-            storedImages.push('Cards/sbc/messiflashback.jpeg');
-            saveStoredImages();
+                challenge.claimed = true;
 
-            // You can add logic here to provide the actual rewards, such as adding it to the user's inventory.
+                // No need to update storedImages, as it's not changing here
+
+                // You can add logic here to provide the actual rewards, such as adding it to the user's inventory.
+            } else {
+                alert("Reward image not found. Please check the image path.");
+            }
         }
     } else {
         alert("You haven't completed the requirements for this challenge yet. You need at least 10 Icon Players.");
     }
 }
+
 
         // Load and display the SBC challenges when the page loads
         window.onload = displaySBCChallenges;
