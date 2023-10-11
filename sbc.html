@@ -58,16 +58,47 @@
             });
         }
 
-        // Function to claim a reward for completing a challenge
-        function claimReward(challenge) {
-            if (challenge.requirement <= iconImagesCollected) {
-                alert(challenge.reward);
-                // You can implement reward logic here, such as displaying an image
-                // or adding it to the user's inventory.
-            } else {
-                alert("You haven't completed the requirements for this challenge yet.");
-            }
+       // Function to claim a reward for completing a challenge
+function claimReward(challenge) {
+    if (challenge.requirement <= iconImagesCollected) {
+        // Check if the reward has already been claimed
+        if (challenge.claimed) {
+            alert("You've already claimed the reward for this challenge.");
+        } else {
+            // Display a message with an image as a reward
+            const rewardMessage = document.createElement('div');
+            rewardMessage.className = 'reward-message';
+
+            // Create an image element for the reward
+            const rewardImage = document.createElement('img');
+            rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
+            rewardImage.alt = 'Reward Image';
+
+            // Create a message element
+            const message = document.createElement('p');
+            message.textContent = challenge.reward;
+
+            // Append the image and message to the reward message
+            rewardMessage.appendChild(rewardImage);
+            rewardMessage.appendChild(message);
+
+            // Display the reward message
+            document.body.appendChild(rewardMessage);
+
+            // Mark the challenge as claimed
+            challenge.claimed = true;
+
+            // Update the user interface to show that the challenge has been completed
+            updateChallengeUI();
+
+            // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
         }
+    } else {
+        alert("You haven't completed the requirements for this challenge yet.");
+    }
+}
+
+
 
         // Load and display the SBC challenges when the page loads
         window.onload = displaySBCChallenges;
