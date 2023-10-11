@@ -10,20 +10,20 @@
     <div id="club-images">
         <script>
             const storedImagesJSON = localStorage.getItem('storedImages');
-     if (storedImagesJSON) {
-         const storedImages = JSON.parse(storedImagesJSON);
-         const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
-         const clubImages = document.getElementById('club-images');
- 
-         uniqueImages.forEach((imageURL) => {
-             const image = document.createElement('img');
-             image.src = imageURL;
-             clubImages.appendChild(image);
-         });
-     }
-         </script>
-            </div>
-    
+            if (storedImagesJSON) {
+                const storedImages = JSON.parse(storedImagesJSON);
+                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
+                const clubImages = document.getElementById('club-images');
+
+                uniqueImages.forEach((imageURL) => {
+                    const image = document.createElement('img');
+                    image.src = imageURL;
+                    clubImages.appendChild(image);
+                });
+            }
+        </script>
+    </div>
+
     <h1>SBC Challenges</h1>
     <div id="sbc-container">
         <!-- SBC challenges will be displayed here using JavaScript -->
@@ -75,41 +75,38 @@
             });
         }
 
-   // Function to claim a reward for completing a challenge
-   function claimReward(challenge) {
-    if (challenge.requirement <= iconImagesCollected) {
-        // Check if the reward has already been claimed
-        if (challenge.claimed) {
-            alert("You've already claimed the reward for this challenge.");
-        } else {
-            // Display a message
-            alert(challenge.reward);
+        // Function to claim a reward for completing a challenge
+        function claimReward(challenge) {
+            if (challenge.requirement <= iconImagesCollected) {
+                // Check if the reward has already been claimed
+                if (challenge.claimed) {
+                    alert("You've already claimed the reward for this challenge.");
+                } else {
+                    // Display a message
+                    alert(challenge.reward);
 
-            // Create an image element for the reward
-            const rewardImage = document.createElement('img');
-            rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
-            rewardImage.alt = 'Reward Image';
+                    // Create an image element for the reward
+                    const rewardImage = document.createElement('img');
+                    rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
+                    rewardImage.alt = 'Reward Image';
 
-            // Add the image to the club section
-            const clubImages = document.getElementById('club-images');
-            clubImages.appendChild(rewardImage);
+                    // Add the image to the club section
+                    const clubImages = document.getElementById('club-images');
+                    clubImages.appendChild(rewardImage);
 
-            // Mark the challenge as claimed
-            challenge.claimed = true;
+                    // Mark the challenge as claimed
+                    challenge.claimed = true;
 
-            // Update the user interface to show that the challenge has been completed
-            updateChallengeUI();
+                    // Add the image URL to the list of stored images
+                    storedImages.push('Cards/sbc/messiflashback.jpeg');
+                    saveStoredImages(); // Save the updated stored images to localStorage
 
-            // Add the image URL to the list of stored images
-            storedImages.push('Cards/sbc/messiflashback.jpeg');
-            saveStoredImages(); // Save the updated stored images to localStorage
-
-            // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
+                    // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
+                }
+            } else {
+                alert("You haven't completed the requirements for this challenge yet.");
+            }
         }
-    } else {
-        alert("You haven't completed the requirements for this challenge yet.");
-    }
-}
 
         // Load and display the SBC challenges when the page loads
         window.onload = displaySBCChallenges;
