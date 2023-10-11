@@ -59,34 +59,23 @@
         }
 
    // Function to claim a reward for completing a challenge
-function claimReward(challenge) {
+   function claimReward(challenge) {
     if (challenge.requirement <= iconImagesCollected) {
         // Check if the reward has already been claimed
         if (challenge.claimed) {
             alert("You've already claimed the reward for this challenge.");
         } else {
-            // Display a message with an image as a reward
-            const rewardMessage = document.createElement('div');
-            rewardMessage.className = 'reward-message';
-
             // Create an image element for the reward
             const rewardImage = document.createElement('img');
             rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
             rewardImage.alt = 'Reward Image';
 
-            // Create a message element
-            const message = document.createElement('p');
-            message.textContent = challenge.reward;
+            // Add the image to the club section
+            const clubImages = document.getElementById('club-images');
+            clubImages.appendChild(rewardImage);
 
-             // Apply CSS style to change the color (you can use any valid CSS color)
-             message.style.color = 'antiquewhite'; // Change the color to blue
-
-            // Append the image and message to the reward message
-            rewardMessage.appendChild(rewardImage);
-            rewardMessage.appendChild(message);
-
-            // Display the reward message
-            document.body.appendChild(rewardMessage);
+            // Display a message
+            alert(challenge.reward);
 
             // Mark the challenge as claimed
             challenge.claimed = true;
@@ -104,6 +93,7 @@ function claimReward(challenge) {
         alert("You haven't completed the requirements for this challenge yet.");
     }
 }
+
 
 
 
