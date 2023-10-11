@@ -58,7 +58,7 @@
             });
         }
 
-       // Function to claim a reward for completing a challenge
+   // Function to claim a reward for completing a challenge
 function claimReward(challenge) {
     if (challenge.requirement <= iconImagesCollected) {
         // Check if the reward has already been claimed
@@ -91,12 +91,17 @@ function claimReward(challenge) {
             // Update the user interface to show that the challenge has been completed
             updateChallengeUI();
 
+            // Add the image URL to the list of stored images
+            storedImages.push('Cards/sbc/messiflashback.jpeg');
+            saveStoredImages(); // Save the updated stored images to localStorage
+
             // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
         }
     } else {
         alert("You haven't completed the requirements for this challenge yet.");
     }
 }
+
 
 
 
