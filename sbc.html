@@ -11,9 +11,23 @@
     
     <!-- Display the user's collection of player cards -->
     <h2>Your Player Collection</h2>
-    <ul id="club-images">
-        <!-- Player cards will be displayed here -->
-    </ul>
+    <div id="club-images">
+        <!-- Display stored unique images from localStorage -->
+        <script>
+            const storedImagesJSON = localStorage.getItem('storedImages');
+            if (storedImagesJSON) {
+                const storedImages = JSON.parse(storedImagesJSON);
+                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
+                const clubImages = document.getElementById('club-images');
+
+                uniqueImages.forEach((imageURL) => {
+                    const image = document.createElement('img');
+                    image.src = imageURL;
+                    clubImages.appendChild(image);
+                });
+            }
+        </script>
+    </div>
 
     <!-- List available SBC challenges -->
     <h2>Available SBC Challenges</h2>
