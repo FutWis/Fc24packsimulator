@@ -3,124 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fc24 SBC</title>
+    <title>SBC Challenges</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Squad Building Challenges</h1>
-    
-    <!-- Display the user's collection of player cards -->
-    <h2>Your Player Collection</h2>
-    <div id="club-images">
-        <!-- Display stored unique images from localStorage -->
-        <script>
-            const storedImagesJSON = localStorage.getItem('storedImages');
-            if (storedImagesJSON) {
-                const storedImages = JSON.parse(storedImagesJSON);
-                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
-                const clubImages = document.getElementById('club-images');
-
-                uniqueImages.forEach((imageURL) => {
-                    const image = document.createElement('img');
-                    image.src = imageURL;
-                    clubImages.appendChild(image);
-                });
-            }
-        </script>
+    <h1>SBC Challenges</h1>
+    <div id="sbc-container">
+        <!-- SBC challenges will be displayed here using JavaScript -->
     </div>
-
-    <!-- List available SBC challenges -->
-    <h2>Available SBC Challenges</h2>
-    <ul id="sbc-challenges">
-        <li>
-            Challenge 1: Collect 10 ICON Players
-            <button onclick="completeSBC('Challenge 1', 10)">Complete</button>
-        </li>
-    </ul>
-
-    <!-- Reward image container -->
-    <div id="reward-container" style="display: none;">
-        <h2>Reward</h2>
-        <img id="reward-image" src="" alt="Reward">
-    </div>
-
-    <!-- Link back to the pack opener -->
-    <a href="index.html">Back to Pack Opener</a>
 
     <script>
-        // Modify the storedImages array to include player objects with a "category" property
-        const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+        // JavaScript functions for SBC challenges
+        // Define an array of SBC challenges with their descriptions and requirements
+        const sbcChallenges = [
+            {
+                title: "Collect 10 Icon Cards",
+                description: "Collect a set of 10 Icon Cards to complete this challenge.",
+                requirement: 10,
+                reward: "You've completed the challenge! Here's your reward image."
+            },
+            // Add more challenges here as needed
+        ];
 
-        // Function to update the player collection in local storage
-        function updatePlayerCollection() {
-            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+        // Function to display SBC challenges
+        function displaySBCChallenges() {
+            const sbcContainer = document.getElementById('sbc-container');
+
+            sbcChallenges.forEach((challenge, index) => {
+                const challengeDiv = document.createElement('div');
+                challengeDiv.className = 'sbc-challenge';
+
+                const title = document.createElement('h2');
+                title.textContent = `Challenge ${index + 1}: ${challenge.title}`;
+
+                const description = document.createElement('p');
+                description.textContent = challenge.description;
+
+                const requirement = document.createElement('p');
+                requirement.textContent = `Requirement: ${challenge.requirement}`;
+
+                const rewardButton = document.createElement('button');
+                rewardButton.textContent = 'Claim Reward';
+                rewardButton.onclick = () => claimReward(challenge);
+
+                challengeDiv.appendChild(title);
+                challengeDiv.appendChild(description);
+                challengeDiv.appendChild(requirement);
+                challengeDiv.appendChild(rewardButton);
+
+                sbcContainer.appendChild(challengeDiv);
+            });
         }
 
-        // Function to complete an SBC challenge
-        function completeSBC(challengeName, requiredPlayers) {
-            // Filter only ICON players from the storedImages
-            const iconPlayersMatchingCategory = storedImages.filter(player => player.imageURL && player.imageURL.includes('Cards/Icons/'));
-
-            console.log('ICON Players Matching Category:', iconPlayersMatchingCategory); // Debugging line
-
-            if (iconPlayersMatchingCategory.length >= requiredPlayers) {
-                // Reward the user with an image (replace 'rewardImageURL' with your image URL)
-                const rewardImageURL = 'Cards/sbc/messiflashback.jpeg';
-
-                // Add the reward to the collection without removing duplicates
-                for (let i = 0; i < requiredPlayers; i++) {
-                    storedImages.push({ name: `${challengeName} Reward`, imageURL: rewardImageURL });
-                }
-
-                // Update the player collection in local storage
-                updatePlayerCollection();
-
-                // Display the reward image
-                displayRewardImage(rewardImageURL);
-
-                // Display a success message (you can improve this part)
-                alert(`SBC Challenge "${challengeName}" completed! You received a reward.`);
+        // Function to claim a reward for completing a challenge
+        function claimReward(challenge) {
+            if (challenge.requirement <= getCompletedChallenges()) {
+                alert(challenge.reward);
+                // You can implement reward logic here, such as displaying an image
+                // or adding it to the user's inventory.
             } else {
-                // Display an error message if the user doesn't meet the requirements
-                alert(`You don't have enough ICON players to complete "${challengeName}".`);
-            }
-
-            // Refresh the UI to reflect the changes
-            displayPlayerCollection();
-        }
-
-        // Function to display the reward image
-        function displayRewardImage(imageURL) {
-            const rewardContainer = document.getElementById('reward-container');
-            const rewardImage = document.getElementById('reward-image');
-            
-            // Set the source and display the reward container
-            rewardImage.src = imageURL;
-            rewardContainer.style.display = 'block';
-        }
-
-        // Function to display the user's player collection
-        function displayPlayerCollection() {
-            const playerCollectionList = document.getElementById('player-collection');
-            
-            // Check if the element exists before manipulating it
-            if (playerCollectionList) {
-                playerCollectionList.innerHTML = '';
-
-                storedImages.forEach((player) => {
-                    if (player.imageURL) {
-                        const listItem = document.createElement('li');
-                        const image = document.createElement('img');
-                        image.src = player.imageURL;
-                        listItem.appendChild(image);
-                        playerCollectionList.appendChild(listItem);
-                    }
-                });
+                alert("You haven't completed the requirements for this challenge yet.");
             }
         }
 
-        // Initialize the UI with the user's player collection
-        displayPlayerCollection();
+        // Function to get the number of completed challenges (you can implement this logic)
+        function getCompletedChallenges() {
+            // You should implement a mechanism to track completed challenges
+            // and return the count here.
+            // For simplicity, this example returns 0.
+            return 0;
+        }
+
+        // Load and display the SBC challenges when the page loads
+        window.onload = displaySBCChallenges;
     </script>
 </body>
 </html>
