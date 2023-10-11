@@ -11,18 +11,18 @@
     <div id="club-images">
         <!-- Display stored unique images from localStorage -->
         <script>
-            const storedImagesJSON = localStorage.getItem('storedImages');
-            if (storedImagesJSON) {
-                const storedImages = JSON.parse(storedImagesJSON);
-                const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
-                const clubImages = document.getElementById('club-images');
+           const storedImagesJSON = localStorage.getItem('storedImages');
+    if (storedImagesJSON) {
+        const storedImages = JSON.parse(storedImagesJSON);
+        const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
+        const clubImages = document.getElementById('club-images');
 
-                uniqueImages.forEach((imageURL) => {
-                    const image = document.createElement('img');
-                    image.src = imageURL;
-                    clubImages.appendChild(image);
-                });
-            }
+        uniqueImages.forEach((imageURL) => {
+            const image = document.createElement('img');
+            image.src = imageURL;
+            clubImages.appendChild(image);
+        });
+    }
         </script>
     </div>
 </body>
