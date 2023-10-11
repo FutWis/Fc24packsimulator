@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="club-images">
+        <script>
+            const storedImagesJSON = localStorage.getItem('storedImages');
+     if (storedImagesJSON) {
+         const storedImages = JSON.parse(storedImagesJSON);
+         const uniqueImages = [...new Set(storedImages)]; // Remove duplicates using a Set
+         const clubImages = document.getElementById('club-images');
+ 
+         uniqueImages.forEach((imageURL) => {
+             const image = document.createElement('img');
+             image.src = imageURL;
+             clubImages.appendChild(image);
+         });
+     }
+         </script>
+            </div>
+    
     <h1>SBC Challenges</h1>
     <div id="sbc-container">
         <!-- SBC challenges will be displayed here using JavaScript -->
