@@ -25,6 +25,9 @@
             // Add more challenges here as needed
         ];
 
+        // Variable to track the number of icon images collected
+        let iconImagesCollected = 10; // Assuming you have 10 icon images
+
         // Function to display SBC challenges
         function displaySBCChallenges() {
             const sbcContainer = document.getElementById('sbc-container');
@@ -57,21 +60,13 @@
 
         // Function to claim a reward for completing a challenge
         function claimReward(challenge) {
-            if (challenge.requirement <= getCompletedChallenges()) {
+            if (challenge.requirement <= iconImagesCollected) {
                 alert(challenge.reward);
                 // You can implement reward logic here, such as displaying an image
                 // or adding it to the user's inventory.
             } else {
                 alert("You haven't completed the requirements for this challenge yet.");
             }
-        }
-
-        // Function to get the number of completed challenges (you can implement this logic)
-        function getCompletedChallenges() {
-            // You should implement a mechanism to track completed challenges
-            // and return the count here.
-            // For simplicity, this example returns 0.
-            return 0;
         }
 
         // Load and display the SBC challenges when the page loads
