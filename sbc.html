@@ -80,37 +80,34 @@
         }
 
         // Function to claim a reward for completing a challenge
-        // Function to claim a reward for completing a challenge
 function claimReward(challenge) {
-    if (challenge.requirement <= iconImagesCollected) {
+    // Count the number of icon images already collected
+    const iconCount = storedImages.filter(image => image.includes('/Icons/')).length;
+
+    if (iconCount >= 10) {
         if (challenge.claimed) {
             alert("You've already claimed the reward for this challenge.");
         } else {
-            if (iconImagesCollected >= 10) { // Check if the player has at least 10 icon players
-                alert(challenge.reward);
+            alert(challenge.reward);
 
-                const rewardImage = document.createElement('img');
-                rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
-                rewardImage.alt = 'Reward Image';
+            const rewardImage = document.createElement('img');
+            rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
+            rewardImage.alt = 'Reward Image';
 
-                const clubImages = document.getElementById('club-images');
-                clubImages.appendChild(rewardImage);
+            const clubImages = document.getElementById('club-images');
+            clubImages.appendChild(rewardImage);
 
-                challenge.claimed = true;
+            challenge.claimed = true;
 
-                storedImages.add('Cards/sbc/messiflashback.jpeg');
-                saveStoredImages();
+            storedImages.push('Cards/sbc/messiflashback.jpeg');
+            saveStoredImages();
 
-                // You can add logic here to provide the actual rewards, such as adding it to the user's inventory.
-            } else {
-                alert("You haven't completed the requirements for this challenge yet.");
-            }
+            // You can add logic here to provide the actual rewards, such as adding it to the user's inventory.
         }
     } else {
-        alert("You haven't completed the requirements for this challenge yet.");
+        alert("You haven't completed the requirements for this challenge yet. You need at least 10 Icon Players.");
     }
 }
-
 
         // Load and display the SBC challenges when the page loads
         window.onload = displaySBCChallenges;
