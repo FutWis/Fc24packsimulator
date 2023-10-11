@@ -80,37 +80,37 @@
         }
 
         // Function to claim a reward for completing a challenge
-        function claimReward(challenge) {
-            if (challenge.requirement <= iconImagesCollected) {
-                // Check if the reward has already been claimed
-                if (challenge.claimed) {
-                    alert("You've already claimed the reward for this challenge.");
-                } else {
-                    // Display a message
-                    alert(challenge.reward);
+        // Function to claim a reward for completing a challenge
+function claimReward(challenge) {
+    if (challenge.requirement <= iconImagesCollected) {
+        if (challenge.claimed) {
+            alert("You've already claimed the reward for this challenge.");
+        } else {
+            if (iconImagesCollected >= 10) { // Check if the player has at least 10 icon players
+                alert(challenge.reward);
 
-                    // Create an image element for the reward
-                    const rewardImage = document.createElement('img');
-                    rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
-                    rewardImage.alt = 'Reward Image';
+                const rewardImage = document.createElement('img');
+                rewardImage.src = 'Cards/sbc/messiflashback.jpeg';
+                rewardImage.alt = 'Reward Image';
 
-                    // Add the image to the club section
-                    const clubImages = document.getElementById('club-images');
-                    clubImages.appendChild(rewardImage);
+                const clubImages = document.getElementById('club-images');
+                clubImages.appendChild(rewardImage);
 
-                    // Mark the challenge as claimed
-                    challenge.claimed = true;
+                challenge.claimed = true;
 
-                    // Add the image URL to the list of stored images
-                    storedImages.add('Cards/sbc/messiflashback.jpeg');
-                    saveStoredImages(); // Save the updated stored images to localStorage
+                storedImages.add('Cards/sbc/messiflashback.jpeg');
+                saveStoredImages();
 
-                    // You can also add logic here to provide the actual rewards, such as adding it to the user's inventory.
-                }
+                // You can add logic here to provide the actual rewards, such as adding it to the user's inventory.
             } else {
                 alert("You haven't completed the requirements for this challenge yet.");
             }
         }
+    } else {
+        alert("You haven't completed the requirements for this challenge yet.");
+    }
+}
+
 
         // Load and display the SBC challenges when the page loads
         window.onload = displaySBCChallenges;
