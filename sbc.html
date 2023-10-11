@@ -78,6 +78,9 @@ function claimReward(challenge) {
             const message = document.createElement('p');
             message.textContent = challenge.reward;
 
+             // Apply CSS style to change the color (you can use any valid CSS color)
+             message.style.color = 'antiquewhite'; // Change the color to blue
+
             // Append the image and message to the reward message
             rewardMessage.appendChild(rewardImage);
             rewardMessage.appendChild(message);
