@@ -42,7 +42,8 @@
             'Rare Gold': 'gold',
             'Nike Ready': 'green',
             'Icon': 'white',
-            'RTTK': 'purple'
+            'RTTK': 'purple',
+            'TOTY': 'blue'
         };
 
         // Function to create confetti elements with different colors
@@ -64,6 +65,8 @@
                 confettiColor = 'purple';    
             }  else if (rarity === 'Trailblazers') {
                 confettiColor = 'red';  
+            }  else if (rarity === 'TOTY') {
+                confettiColor = 'blue';  
             } else {
                 confettiColor = 'black'; // Default color for unknown rarity
             }
@@ -91,10 +94,11 @@
         const imageCategories = [
             { category: 'Common Gold', rarity: 35 },
             { category: 'Rare Gold', rarity: 25 },
-            { category: 'Nike Ready', rarity: 20 },
+            { category: 'Nike Ready', rarity: 19.5 },
             { category: 'Icon', rarity: 2 },
             { category: 'RTTK', rarity: 10 },
-            { category: 'Trailblazers', rarity: 8 }
+            { category: 'Trailblazers', rarity: 8 },
+            { category: 'TOTY', rarity: 0.5 }
         ];
 
         // Define a mapping of category names to arrays of file paths
@@ -189,6 +193,7 @@
         'Cards/Icons/Zola.png'],
             'RTTK': ['Cards/RTTK/Haaland.png'],
             'Trailblazers': ['Cards/Trailblazers/Mbappe.png','Cards/Trailblazers/Salah.png','Cards/Trailblazers/Acosta.png', 'Cards/Trailblazers/Bellingham.png', 'Cards/Trailblazers/DiLorenzo.png', 'Cards/Trailblazers/Griezmann.png', 'Cards/Trailblazers/Guirassy.png', 'Cards/Trailblazers/Hansen.png', 'Cards/Trailblazers/Herrera.png', 'Cards/Trailblazers/Kerolin.png', 'Cards/Trailblazers/Kounde.png', 'Cards/Trailblazers/Mkhitaryan.png', 'Cards/Trailblazers/RubenDias.png', 'Cards/Trailblazers/Wagner.png'], 
+            'TOTY': ['Cards/TOTY/Haaland.png','Cards/TOTY/Mbappe.png','Cards/TOTY/Messi.png','Cards/TOTY/Ronaldo.png','Cards/TOTY/Xavi.png'],
         };
 
         // Function to select a random category based on rarity percentages
